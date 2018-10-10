@@ -13,6 +13,7 @@ export class GameEngine
 
     // items in the game
     public ball:Ball;
+    public ball2:Ball;
     public player1:Player;
  
     // canvas info
@@ -20,8 +21,8 @@ export class GameEngine
     public canvasHeight:number;
 
     // keep track of key states
-    public aKey:boolean;
-    public qKey:boolean;
+    public downKey:boolean;
+    public upKey:boolean;
 
     private canvas:HTMLCanvasElement;
     private ctx:CanvasRenderingContext2D;
@@ -49,11 +50,14 @@ export class GameEngine
         //ceate gameobjects
         this.objects.push(new Framerate(new Vector(10,10)));
         
-        this.player1 = new Player(new Vector(20,10), this);
+        this.player1 = new Player(new Vector(80,20), this);
         this.objects.push(this.player1);
 
-        this.ball = new Ball(new Vector(this.canvasWidth/2, this.canvasHeight/2), this);
+        this.ball = new Ball(new Vector(this.canvasWidth / 2, this.canvasHeight / 2), new Vector(0.7, 1), "#fff", this);
         this.objects.push(this.ball);
+
+        this.ball2 = new Ball(new Vector(this.canvasWidth / 3, this.canvasHeight / 5), new Vector(0.7, -0.5), "orange", this);
+        this.objects.push(this.ball2);
 
         this.gameLoop();
     }
@@ -63,11 +67,11 @@ export class GameEngine
     {
         if (event.repeat) {return};
         switch (event.key) {
-            case "a":
-                this.aKey = true;
+            case "ArrowDown":
+                this.downKey = true;
                 break;
-            case "q":
-                this.qKey = true;
+            case "ArrowUp":
+                this.upKey = true;
         }
     }
 
@@ -75,11 +79,11 @@ export class GameEngine
     private keyUp(event: KeyboardEvent): void
     {
         switch (event.key) {
-            case "a":
-                this.aKey=false;
+            case "ArrowDown":
+                this.downKey=false;
                 break;
-            case "q":
-                this.qKey=false;
+            case "ArrowUp":
+                this.upKey=false;
                 break;
         }   
     } 
@@ -137,4 +141,3 @@ export class GameEngine
 
 //start gameengine
 new GameEngine();
-

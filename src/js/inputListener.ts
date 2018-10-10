@@ -1,6 +1,6 @@
 export class Listener
 {
-    public aKey: boolean = false;
+    public downKey: boolean = false;
 
     constructor()
     {
@@ -11,11 +11,11 @@ export class Listener
     private keyDown(event:KeyboardEvent): void
     {
         console.log("KeyDown");
-        this.aKey = true;
+        this.downKey = true;
     }
 
     private keyUp(event: KeyboardEvent): void
     {
-        this.aKey = false;
+        this.downKey = false;
     }
 }
